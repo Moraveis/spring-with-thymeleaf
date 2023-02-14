@@ -4,6 +4,7 @@ import me.joao.springwiththymeleaf.entity.Employee;
 import me.joao.springwiththymeleaf.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,13 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
 
         return "employees/employee-form";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("employeeId") Integer id) {
+        employeeService.deleteById(id);
+
+        return "redirect:/employees/list";
     }
 
 }
