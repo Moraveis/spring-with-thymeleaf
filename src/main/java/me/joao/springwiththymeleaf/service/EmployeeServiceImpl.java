@@ -1,7 +1,7 @@
 package me.joao.springwiththymeleaf.service;
 
 
-import me.joao.springwiththymeleaf.dao.EmployeeDAO;
+import me.joao.springwiththymeleaf.dao.EmployeeJpaRepository;
 import me.joao.springwiththymeleaf.entity.Employee;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,22 +11,22 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final EmployeeDAO employeeRepository;
+    private final EmployeeJpaRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeDAO employeeRepository) {
+    public EmployeeServiceImpl(EmployeeJpaRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
     @Override
     @Transactional
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByOrderByLastNameAsc();
     }
 
     @Override
     @Transactional
     public Employee findById(int id) {
-        return employeeRepository.findById(id);
+        return employeeRepository.findById(id).get();
     }
 
     @Override
