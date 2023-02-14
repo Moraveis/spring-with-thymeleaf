@@ -20,12 +20,16 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
+        <th>Action</th>
         </thead>
         <tbody>
         <tr th:each="emp : ${employees}">
             <td th:text="${emp.firstName}"/>
             <td th:text="${emp.lastName}"/>
             <td th:text="${emp.email}"/>
+            <td>
+                <a th:href="@{/employees/edit(employeeId=${emp.id})}">Update</a>
+            </td>
         </tr>
         </tbody>
     </table>
